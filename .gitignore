@@ -1,0 +1,5 @@
+**/bin/
+**/obj/
+**/.azurefunctions/
+**/local.settings.json
+.vs/

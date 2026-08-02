@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "FreakyFashion_InventoryService": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7110",
+      "launchBrowser": false
+    }
+  }
+}

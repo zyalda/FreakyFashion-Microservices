@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/FreakyFashion.InventoryService/">
+    <Project Path="src/FreakyFashion.InventoryService/FreakyFashion_InventoryService.csproj" />
+  </Folder>
+  <Folder Name="/src/FreakyFashion.OrderService/">
+    <Project Path="src/FreakyFashion.OrderService/FreakyFashion_OrderService.csproj" />
+  </Folder>
+  <Folder Name="/src/FreakyFashion.PaymentService/">
+    <Project Path="src/FreakyFashion.PaymentService/FreakyFashion_PaymentService.csproj" />
+  </Folder>
+</Solution>

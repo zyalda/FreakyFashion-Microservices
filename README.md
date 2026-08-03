@@ -6,7 +6,7 @@ Welcome to the backend architecture for **FreakyFashion**, a modern e-commerce p
 
 This project is configured as a **Mono-repo** containing isolated microservices that communicate completely asynchronously using the **Database-per-Service** and **Publisher-Subscriber** patterns to ensure maximum scalability and decoupling.
 
-*   **OrderService (Publisher):** An HTTP-triggered Azure Function that receives orders, stores them as raw JSON documents in Cosmos DB, and broadcasts an `OrderCreated` event to a Fanout Exchange.
+*   **OrderService (Publisher):** An HTTP-triggered Azure Function that receives orders from user bash terminal, stores them as raw JSON documents in Cosmos DB, and broadcasts an `OrderCreated` event to a Fanout Exchange.
 *   **Message Broker (RabbitMQ):** Handles async broadcast events using a `Fanout Exchange` to distribute events instantly to all connected subscribers.
 *   **Inventory & Payment Services (Subscribers):** Independent background worker services running as `BackgroundService` threads that listen to the broker and handle stock reduction and payment transactions simultaneously without blocking.
 
@@ -53,5 +53,5 @@ cd src/FreakyFashion-InventoryService && func start --port 7072
 cd src/FreakyFashion-PaymentService && func start --port 7073
 
 # Triggering an Order via CLI
-curl -X POST http://localhost:7071/api/orders
+curl -X POST http://localhost:7071/api/orders -H "Content-Type: application/json" -d '{"CustomerId": "cyber-body-2026", "TotalPrice": 135.00, "Items": ["Freaky Leather Pants", "Matrix Sunglasses"]}'
 ```

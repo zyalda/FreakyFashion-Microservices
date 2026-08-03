@@ -43,7 +43,7 @@ namespace FreakyFashion.OrderService
             var orderId = Guid.NewGuid().ToString();
             var orderData = new
             {
-                id = orderId, // Cosmos DB kräver alltid ett småbokstavs-"id"
+                id = orderId, // Cosmos DB demand flatcase letters - "id"
                 CustomerId = "my-body-99",
                 TotalPrice = 2499.00,
                 Status = "Pending",

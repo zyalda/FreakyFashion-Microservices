@@ -38,17 +38,30 @@ namespace FreakyFashion.OrderService
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "orders")] HttpRequest req)
         {
-            _logger.LogInformation("Tar emot en ny order i FreakyFashion...");
+            _logger.LogInformation("Tar emot DYNAMISK order i FreakyFashion...");
+
+            //Read JSON-string user send in HTTP-body.
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            
+            var customerData = JsonSerializer.Deserialize<OrderRequest>(requestBody, new JsonSerializerOptions 
+            { 
+                PropertyNameCaseInsensitive = true
+            });
+
+            if (customerData == null || string.IsNullOrEmpty(customerData.CustomerId))
+            {
+                return new BadRequestObjectResult("Felaktig order-data. Skicka med en giltig JSON-body!");
+            }
 
             var orderId = Guid.NewGuid().ToString();
             var orderData = new
             {
                 id = orderId, // Cosmos DB demand flatcase letters - "id"
-                CustomerId = "my-body-99",
-                TotalPrice = 2499.00,
+                CustomerId = customerData.CustomerId,
+                TotalPrice = customerData.TotalPrice,
                 Status = "Pending",
                 CreatedAt = DateTime.UtcNow,
-                Items = new[] { "Freaky Bomber Jacket", "Platform Boots" }
+                Items = customerData.Items
             };
 
             Database db = await _cosmosClient.CreateDatabaseIfNotExistsAsync("FreakyFashionDb");

@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/src/" />
+  <Folder Name="/src/">
+    <Project Path="src/FreakyFashion.ApiGateway/FreakyFashion.ApiGateway.csproj" />
+  </Folder>
   <Folder Name="/src/FreakyFashion.InventoryService/">
     <Project Path="src/FreakyFashion.InventoryService/FreakyFashion_InventoryService.csproj" />
   </Folder>
